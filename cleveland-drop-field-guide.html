@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Cleveland Drop — Field Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0b;
+    --black-card: #111113;
+    --black-elevated: #19191d;
+    --border: #2a2a30;
+    --border-light: #3a3a42;
+    --orange: #ff6b35;
+    --neon-orange: #ff8c00;
+    --electric-blue: #3b82f6;
+    --neon-cyan: #06d6a0;
+    --hot-pink: #f72585;
+    --vivid-purple: #8b5cf6;
+    --acid-yellow: #facc15;
+    --lime: #84cc16;
+    --green: #22c55e;
+    --red: #ef4444;
+    --white: #ffffff;
+    --muted: #b0b0b8;
+    --dim: #666670;
+    --faint: #44444c;
+    --grad-fire: linear-gradient(135deg, #ff6b35, #ff8c00, #facc15);
+    --grad-heat: linear-gradient(135deg, #f72585, #ff6b35, #ff8c00);
+    --grad-electric: linear-gradient(135deg, #3b82f6, #8b5cf6, #f72585);
+    --grad-money: linear-gradient(135deg, #06d6a0, #22c55e, #84cc16);
+    --grad-sunset: linear-gradient(135deg, #ff6b35, #f72585, #8b5cf6);
+    --grad-ocean: linear-gradient(135deg, #06d6a0, #3b82f6, #8b5cf6);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Outfit', sans-serif;
+    overflow-x: hidden;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* === UTILITIES === */
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .display { font-family: 'Bebas Neue', sans-serif; letter-spacing: -0.5px; }
+  .grad-fire { background: var(--grad-fire); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .grad-heat { background: var(--grad-heat); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .grad-electric { background: var(--grad-electric); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .grad-money { background: var(--grad-money); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .grad-sunset { background: var(--grad-sunset); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+  /* === STICKY NAV === */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,10,11,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 24px;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .nav-brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+  }
+  .nav-brand .dot { color: var(--orange); }
+  .nav-links {
+    display: flex; gap: 4px; flex-wrap: wrap;
+  }
+  .nav-links a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+  }
+  .nav-links a:hover {
+    color: var(--orange);
+    background: rgba(255,107,53,0.08);
+  }
+
+  /* === HERO === */
+  .hero {
+    min-height: 88vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 80px 24px 60px;
+    position: relative;
+    overflow: hidden;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 700px 500px at 20% 30%, rgba(255,107,53,0.15) 0%, transparent 70%),
+      radial-gradient(ellipse 600px 500px at 80% 70%, rgba(247,37,133,0.10) 0%, transparent 70%),
+      radial-gradient(ellipse 400px 400px at 50% 100%, rgba(139,92,246,0.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+  }
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--orange);
+  }
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(72px, 13vw, 180px);
+    line-height: 0.85;
+    letter-spacing: -3px;
+    margin-bottom: 24px;
+  }
+  .hero h1 .line2 {
+    display: block;
+    background: var(--grad-heat);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-tagline {
+    font-size: clamp(20px, 2.5vw, 28px);
+    font-weight: 300;
+    color: var(--muted);
+    max-width: 720px;
+    margin-bottom: 48px;
+    line-height: 1.4;
+  }
+  .hero-tagline strong {
+    color: var(--white);
+    font-weight: 600;
+  }
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+    max-width: 900px;
+  }
+  .hero-stat {
+    padding: 20px 22px;
+    background: var(--black-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-stat::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--orange);
+  }
+  .hero-stat:nth-child(2)::before { background: var(--hot-pink); }
+  .hero-stat:nth-child(3)::before { background: var(--vivid-purple); }
+  .hero-stat:nth-child(4)::before { background: var(--neon-cyan); }
+  .hero-stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 6px;
+  }
+  .hero-stat-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 0;
+  }
+  .hero-stat-sub {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* === SECTION === */
+  .section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 24px;
+    position: relative;
+  }
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::before {
+    content: '';
+    width: 30px;
+    height: 1px;
+    background: var(--orange);
+  }
+  .section-label.pink { color: var(--hot-pink); }
+  .section-label.pink::before { background: var(--hot-pink); }
+  .section-label.purple { color: var(--vivid-purple); }
+  .section-label.purple::before { background: var(--vivid-purple); }
+  .section-label.cyan { color: var(--neon-cyan); }
+  .section-label.cyan::before { background: var(--neon-cyan); }
+  .section-label.yellow { color: var(--acid-yellow); }
+  .section-label.yellow::before { background: var(--acid-yellow); }
+  .section h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(44px, 6vw, 78px);
+    line-height: 0.9;
+    letter-spacing: -1.5px;
+    margin-bottom: 24px;
+  }
+  .section-intro {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 760px;
+    margin-bottom: 56px;
+    line-height: 1.6;
+  }
+
+  /* === MISSION CALLOUT === */
+  .mission {
+    background: var(--black-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 48px 40px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .mission::before {
+    content: '';
+    position: absolute; top:0; left:0; right:0;
+    height: 4px;
+    background: var(--grad-fire);
+  }
+  .mission-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 16px;
+  }
+  .mission-statement {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.05;
+    letter-spacing: -1px;
+  }
+  .mission-statement .accent {
+    background: var(--grad-fire);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* === ACT TIMELINE === */
+  .acts {
+    display: grid;
+    gap: 20px;
+  }
+  .act {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 28px;
+    align-items: start;
+    background: var(--black-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 32px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .act:hover {
+    border-color: var(--border-light);
+    transform: translateY(-2px);
+  }
+  .act::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+  }
+  .act:nth-child(1)::before { background: var(--orange); }
+  .act:nth-child(2)::before { background: var(--hot-pink); }
+  .act:nth-child(3)::before { background: var(--vivid-purple); }
+  .act:nth-child(4)::before { background: var(--electric-blue); }
+  .act:nth-child(5)::before { background: var(--neon-cyan); }
+  .act-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 64px;
+    line-height: 0.85;
+    letter-spacing: -2px;
+    color: var(--white);
+  }
+  .act:nth-child(1) .act-num { background: var(--grad-fire); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .act:nth-child(2) .act-num { background: var(--grad-heat); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .act:nth-child(3) .act-num { background: var(--grad-electric); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .act:nth-child(4) .act-num { background: var(--grad-ocean); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .act:nth-child(5) .act-num { background: var(--grad-money); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .act-num-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--dim);
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+  .act-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: -0.5px;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .act-timecode {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--orange);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .act-body {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  .act-body strong {
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  /* === SUBPLOT GRID === */
+  .subplots {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .subplot {
+    background: var(--black-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 26px;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  .subplot:hover {
+    border-color: var(--border-light);
+    transform: translateY(-2px);
+  }
+  .subplot-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--dim);
+    margin-bottom: 10px;
+  }
+  .subplot-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: -0.5px;
+    line-height: 1.05;
+    margin-bottom: 12px;
+  }
+  .subplot-engine {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-bottom: 14px;
+  }
+  .engine-retention { background: rgba(255,107,53,0.15); color: var(--orange); }
+  .engine-emotion { background: rgba(247,37,133,0.15); color: var(--hot-pink); }
+  .engine-teaching { background: rgba(139,92,246,0.15); color: var(--vivid-purple); }
+  .engine-heart { background: rgba(6,214,160,0.15); color: var(--neon-cyan); }
+  .engine-structure { background: rgba(250,204,21,0.15); color: var(--acid-yellow); }
+  .engine-hidden { background: rgba(132,204,22,0.15); color: var(--lime); }
+  .subplot-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+  .subplot-resolves {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--dim);
+    letter-spacing: 1px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+  .subplot-resolves strong {
+    color: var(--white);
+  }
+
+  /* === MUST CAPTURE === */
+  .capture-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 12px;
+  }
+  .capture-item {
+    background: var(--black-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .capture-check {
+    width: 22px; height: 22px;
+    border: 2px solid var(--orange);
+    border-radius: 6px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    position: relative;
+  }
+  .capture-text {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--white);
+  }
+  .capture-text .who {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--orange);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* === SCHEDULE === */
+  .day-tabs {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+  .day-tab {
+    padding: 14px 22px;
+    background: var(--black-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .day-tab-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--dim);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .day-tab-day {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 0;
+  }
+
+  .schedule {
+    position: relative;
+  }
+  .schedule::before {
+    content: '';
+    position: absolute;
+    left: 110px;
+    top: 12px; bottom: 12px;
+    width: 1px;
+    background: var(--border);
+  }
+  .schedule-day-header {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 40px;
+    letter-spacing: -1px;
+    margin: 40px 0 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .schedule-day-header:first-child {
+    margin-top: 0;
+  }
+  .schedule-day-header span {
+    background: var(--grad-fire);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .sat span {
+    background: var(--grad-electric);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .slot {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 28px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(42,42,48,0.5);
+    position: relative;
+  }
+  .slot-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--orange);
+    letter-spacing: 1px;
+    padding-top: 2px;
+  }
+  .slot-time .clock {
+    display: block;
+    font-size: 10px;
+    color: var(--dim);
+    margin-top: 4px;
+    letter-spacing: 1.5px;
+  }
+  .slot-content {
+    position: relative;
+  }
+  .slot-content::before {
+    content: '';
+    position: absolute;
+    left: -28px;
+    top: 7px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--orange);
+  }
+  .slot-title {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+  .slot-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-bottom: 6px;
+  }
+  .slot-capture {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--hot-pink);
+    text-transform: uppercase;
+  }
+  .slot-capture::before {
+    content: '◉ ';
+  }
+
+  /* === CREW === */
+  .crew {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .crew-card {
+    background: var(--black-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .crew-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .crew-card.matt::before { background: var(--grad-fire); }
+  .crew-card.vince::before { background: var(--grad-heat); }
+  .crew-card.austin::before { background: var(--grad-electric); }
+  .crew-role {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--dim);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .crew-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    letter-spacing: -0.5px;
+    margin-bottom: 18px;
+    line-height: 1;
+  }
+  .matt .crew-name { background: var(--grad-fire); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .vince .crew-name { background: var(--grad-heat); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .austin .crew-name { background: var(--grad-electric); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .crew-list {
+    list-style: none;
+  }
+  .crew-list li {
+    font-size: 14px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    color: var(--white);
+    line-height: 1.5;
+  }
+  .crew-list li:last-child { border-bottom: none; }
+  .crew-list li::before {
+    content: '→ ';
+    color: var(--orange);
+    font-family: 'JetBrains Mono', monospace;
+    margin-right: 8px;
+  }
+
+  /* === EQUIPMENT === */
+  .equipment {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .equip-cat {
+    background: var(--black-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+  }
+  .equip-cat-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .equip-cat-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0;
+  }
+  .equip-cat-icon {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    color: var(--orange);
+    padding: 4px 8px;
+    border: 1px solid var(--orange);
+    border-radius: 4px;
+  }
+  .equip-list {
+    list-style: none;
+  }
+  .equip-list li {
+    font-size: 13px;
+    padding: 8px 0;
+    color: var(--muted);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    line-height: 1.5;
+  }
+  .equip-checkbox {
+    width: 14px;
+    height: 14px;
+    border: 1.5px solid var(--border-light);
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+  .equip-list li strong {
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  /* === CLOCK CALLOUT === */
+  .clock-callout {
+    background: linear-gradient(135deg, rgba(255,107,53,0.12), rgba(247,37,133,0.08), rgba(139,92,246,0.06));
+    border: 1px solid rgba(255,107,53,0.4);
+    border-radius: 20px;
+    padding: 48px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 40px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .clock-digits {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(48px, 10vw, 96px);
+    font-weight: 700;
+    background: var(--grad-fire);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 40px rgba(255,140,0,0.3);
+    line-height: 1;
+    letter-spacing: -2px;
+  }
+  .clock-text h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: -0.5px;
+    margin-bottom: 12px;
+  }
+  .clock-text p {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .clock-text strong { color: var(--white); }
+
+  /* === TITLE THUMB === */
+  .title-thumb {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .tt-card {
+    background: var(--black-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+  }
+  .tt-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 16px;
+  }
+  .tt-options {
+    list-style: none;
+  }
+  .tt-options li {
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    background: var(--black-elevated);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: 1.1;
+  }
+  .tt-options li::before {
+    content: 'A/B';
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    color: var(--orange);
+    margin-bottom: 6px;
+  }
+  .tt-options li:nth-child(2)::before { content: 'A/B'; color: var(--hot-pink); }
+  .tt-options li:nth-child(3)::before { content: 'A/B'; color: var(--vivid-purple); }
+
+  .thumb-mock {
+    background: linear-gradient(135deg, #1a1a1f, #0a0a0b);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    aspect-ratio: 16/9;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 14px;
+  }
+  .thumb-mock::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(255,107,53,0.2), transparent 70%);
+  }
+  .thumb-48 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 8vw, 88px);
+    letter-spacing: -3px;
+    line-height: 0.85;
+    background: var(--grad-fire);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    z-index: 1;
+  }
+  .thumb-sub {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0;
+    color: var(--white);
+    position: relative;
+    z-index: 1;
+  }
+  .thumb-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .thumb-desc strong { color: var(--white); }
+
+  /* === SERIES === */
+  .series {
+    background: linear-gradient(135deg, rgba(59,130,246,0.10), rgba(139,92,246,0.10), rgba(247,37,133,0.08));
+    border: 1px solid rgba(139,92,246,0.3);
+    border-radius: 20px;
+    padding: 48px;
+    text-align: left;
+  }
+  .series-vol {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 4px;
+    color: var(--vivid-purple);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .series h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(32px, 5vw, 52px);
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+  .series h3 span {
+    background: var(--grad-electric);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .series p {
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 720px;
+    margin-bottom: 24px;
+  }
+  .series p strong { color: var(--white); }
+  .series-volumes {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .vol-pill {
+    padding: 10px 18px;
+    background: var(--black-card);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--muted);
+  }
+  .vol-pill.active {
+    background: var(--grad-fire);
+    color: var(--black);
+    border: none;
+    font-weight: 700;
+  }
+  .vol-pill.next {
+    border-color: var(--vivid-purple);
+    color: var(--vivid-purple);
+  }
+
+  /* === FOOTER === */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: 60px 24px 40px;
+    text-align: center;
+    margin-top: 80px;
+  }
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 4px;
+    margin-bottom: 12px;
+  }
+  .footer-logo .dot { color: var(--orange); }
+  .footer p {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--dim);
+    text-transform: uppercase;
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 768px) {
+    .act { grid-template-columns: 1fr; gap: 16px; padding: 24px; }
+    .act-num { font-size: 48px; }
+    .schedule::before { left: 0; display: none; }
+    .slot { grid-template-columns: 1fr; gap: 6px; }
+    .slot-content::before { display: none; }
+    .clock-callout { grid-template-columns: 1fr; padding: 28px; text-align: center; }
+    .title-thumb { grid-template-columns: 1fr; }
+    .series { padding: 28px; }
+    .hero { padding: 60px 20px 40px; }
+    .section { padding: 60px 20px; }
+    .nav-links { display: none; }
+  }
+
+  /* === PRINT === */
+  @media print {
+    body { background: white; color: black; font-size: 11pt; }
+    .nav { display: none; }
+    .hero { min-height: auto; page-break-after: always; }
+    .section { page-break-inside: avoid; padding: 30px 20px; }
+    .act, .subplot, .crew-card, .equip-cat, .mission, .clock-callout, .series { page-break-inside: avoid; border: 1px solid #ddd !important; background: white !important; color: black !important; }
+    .grad-fire, .grad-heat, .grad-electric, .grad-money, .grad-sunset, .hero h1 .line2, .crew-name, .act-num, .clock-digits, .thumb-48, .series h3 span, .mission-statement .accent {
+      -webkit-text-fill-color: black !important;
+      color: black !important;
+      background: none !important;
+    }
+    .muted, .dim, .slot-desc, .act-body, .subplot-desc, .thumb-desc, .series p, .hero-tagline { color: #333 !important; }
+    .equip-list li, .crew-list li, .capture-text { color: black !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-brand">NO<span class="dot">.</span>FLUFF<span style="color:var(--dim); margin-left:8px;">/ FIELD GUIDE</span></div>
+  <div class="nav-links">
+    <a href="#mission">Mission</a>
+    <a href="#plot">Plot</a>
+    <a href="#subplots">Subplots</a>
+    <a href="#capture">Must Capture</a>
+    <a href="#schedule">Schedule</a>
+    <a href="#crew">Crew</a>
+    <a href="#gear">Gear</a>
+    <a href="#thumb">Thumb/Title</a>
+    <a href="#series">Series</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Field Guide · Volume 2 · Cleveland</div>
+  <h1>
+    The Cleveland<br>
+    <span class="line2">Drop.</span>
+  </h1>
+  <p class="hero-tagline">
+    <strong>48 hours.</strong> One city I've never been to. One operator who needs his business fixed. <strong>Go.</strong>
+  </p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-label">Clock</div>
+      <div class="hero-stat-value">48:00:00</div>
+      <div class="hero-stat-sub">on-screen countdown</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-label">Operator</div>
+      <div class="hero-stat-value">Justin Spellman</div>
+      <div class="hero-stat-sub">Akron, OH</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-label">Crew</div>
+      <div class="hero-stat-value">Matt · Vince · Austin</div>
+      <div class="hero-stat-sub">+ Justin</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-label">Volume</div>
+      <div class="hero-stat-value">02 / SERIES</div>
+      <div class="hero-stat-sub">Florida w/ Joe = V1</div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section class="section" id="mission">
+  <div class="section-label">01 — The Master Angle</div>
+  <h2>The mission, in <span class="grad-fire">one line</span>.</h2>
+  <p class="section-intro">The wheel spin is how Justin got picked. The clock is why people watch. The deal is the trophy. The diagnostic is the lesson.</p>
+
+  <div class="mission">
+    <div class="mission-label">› Master Statement</div>
+    <div class="mission-statement">
+      "<span class="accent">48 hours.</span> One city I've never been to. One operator who needs his business fixed. <span class="accent">Go.</span>"
+    </div>
+  </div>
+
+  <div class="mission" style="margin-top:16px;">
+    <div class="mission-label">› What makes this different from V1 (Florida w/ Joe)</div>
+    <div class="mission-statement" style="font-size:clamp(20px, 2.5vw, 28px); line-height:1.3;">
+      Justin already runs the model. He's done deals. The story isn't <span style="color:var(--red);">rebuild.</span> It's <span class="accent">find the leak.</span> His machine works — it's just sputtering. Most viewers aren't broken either. Justin is their mirror.
+    </div>
+  </div>
+</section>
+
+<!-- PLOT -->
+<section class="section" id="plot">
+  <div class="section-label pink">02 — The Main Plot</div>
+  <h2>Five acts. One <span class="grad-heat">ticking clock.</span></h2>
+  <p class="section-intro">Tight arc, escalating stakes, no slack. Each act has its own job. The clock is visible the entire video.</p>
+
+  <div class="acts">
+    <div class="act">
+      <div>
+        <div class="act-num">01</div>
+        <div class="act-num-sub">The Setup</div>
+      </div>
+      <div>
+        <div class="act-title">The Wheel Spins. The Clock Starts.</div>
+        <div class="act-timecode">0:00 — 1:30 · CLOCK STARTS 48:00:00</div>
+        <div class="act-body">
+          Cold open: fast-cut montage of the wheel spinning in front of the community, <strong>Justin's name landing,</strong> his face on the reveal call. Hard cut to me on the plane: <em>"In 48 hours I have to land in a city I've never been to, fix his business, and try to do a deal — all on camera."</em> Clock starts on screen.
+        </div>
+      </div>
+    </div>
+
+    <div class="act">
+      <div>
+        <div class="act-num">02</div>
+        <div class="act-num-sub">The Landing</div>
+      </div>
+      <div>
+        <div class="act-title">Boots Down. Drive to Akron.</div>
+        <div class="act-timecode">1:30 — 4:00 · CLOCK ~46:00:00</div>
+        <div class="act-body">
+          Red-eye lands 7:30 AM Friday. Tired, real, no makeup. Drive to Akron — narrate over the windshield: who Justin is, what he's already done with the model, what's <strong>NOT clicking.</strong> Set the diagnostic up. <em>"His machine works. It's just sputtering. My job in 48 hours is to find the leak and prove the fix."</em>
+        </div>
+      </div>
+    </div>
+
+    <div class="act">
+      <div>
+        <div class="act-num">03</div>
+        <div class="act-num-sub">The Diagnostic</div>
+      </div>
+      <div>
+        <div class="act-title">Whiteboard. Find the Leak.</div>
+        <div class="act-timecode">4:00 — 8:00 · CLOCK ~44:00:00</div>
+        <div class="act-body">
+          Arrive at Justin's. Hug, quick reaction. Then straight to the whiteboard. Pull his actual numbers on camera — <strong>messages, Tier 1s, TTBs, offers.</strong> Find the leak live. This is the <strong>teaching heart</strong> of the video — non-RE viewers learn the Gatekeeper model in 2 minutes, RE operators see their own business in Justin's numbers.
+        </div>
+      </div>
+    </div>
+
+    <div class="act">
+      <div>
+        <div class="act-num">04</div>
+        <div class="act-num-sub">The Run</div>
+      </div>
+      <div>
+        <div class="act-title">I Take the Controls. Stakes Escalate.</div>
+        <div class="act-timecode">8:00 — 14:00 · CLOCK 30:00:00 → 12:00:00</div>
+        <div class="act-body">
+          <strong>Call, Comp, Close</strong> at operator speed. Justin shadows. Live calls. Live "yeses." Driving to a property. Walking up to a door in Meta glasses. The clock keeps ticking visible in the corner. Stakes escalate: rejections → dead ends → near-miss → breakthrough.
+        </div>
+      </div>
+    </div>
+
+    <div class="act">
+      <div>
+        <div class="act-num">05</div>
+        <div class="act-num-sub">The Handoff</div>
+      </div>
+      <div>
+        <div class="act-title">Pipeline Delivered. Clock Hits Zero.</div>
+        <div class="act-timecode">14:00 — 17:00 · CLOCK 00:00:00</div>
+        <div class="act-body">
+          Whether a contract lands or doesn't, by Saturday afternoon I've built him a real pipeline. <strong>Hand it over on camera.</strong> Justin to camera: what changes Monday. Me to camera: the leak most operators have. Plane back to Phoenix. Clock hits 00:00:00.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBPLOTS -->
+<section class="section" id="subplots">
+  <div class="section-label purple">03 — The Subplots</div>
+  <h2>Six threads. <span class="grad-electric">Six engines.</span></h2>
+  <p class="section-intro">Each subplot resolves at a different moment, so the viewer never drifts. Different threads do different jobs — retention, emotion, teaching, heart, structure, proof.</p>
+
+  <div class="subplots">
+    <div class="subplot">
+      <div class="subplot-num">SUBPLOT 01</div>
+      <div class="subplot-title">Can He Pull It Off?</div>
+      <span class="subplot-engine engine-retention">Retention Engine</span>
+      <div class="subplot-desc">The operator-drop bet. Phoenix guy, never been to Akron, 48 hours — can the system travel?</div>
+      <div class="subplot-resolves">RESOLVES › <strong>Deal / no-deal moment in Act 5</strong></div>
+    </div>
+
+    <div class="subplot">
+      <div class="subplot-num">SUBPLOT 02</div>
+      <div class="subplot-title">Wheel Spin / Community Payoff</div>
+      <span class="subplot-engine engine-emotion">Emotion Engine</span>
+      <div class="subplot-desc">Pre-cut B-roll of the spin and Justin's reveal call, layered through the video.</div>
+      <div class="subplot-resolves">RESOLVES › <strong>The handoff — Justin sees what he won</strong></div>
+    </div>
+
+    <div class="subplot">
+      <div class="subplot-num">SUBPLOT 03</div>
+      <div class="subplot-title">The Leak Hunt</div>
+      <span class="subplot-engine engine-teaching">Teaching Engine</span>
+      <div class="subplot-desc">From the whiteboard forward, viewers are trying to spot the leak with me. What's broken in Justin's business?</div>
+      <div class="subplot-resolves">RESOLVES › <strong>Mid-video, leak named on camera</strong></div>
+    </div>
+
+    <div class="subplot">
+      <div class="subplot-num">SUBPLOT 04</div>
+      <div class="subplot-title">Justin The Human</div>
+      <span class="subplot-engine engine-heart">Heart Engine</span>
+      <div class="subplot-desc">Quick beats — family, why he started, what's at stake personally. 2–3 short cutaways scattered through.</div>
+      <div class="subplot-resolves">RESOLVES › <strong>Justin's final to-camera</strong></div>
+    </div>
+
+    <div class="subplot">
+      <div class="subplot-num">SUBPLOT 05</div>
+      <div class="subplot-title">The Clock</div>
+      <span class="subplot-engine engine-structure">Structural Engine</span>
+      <div class="subplot-desc">Always visible. Compounds tension. Every scene change resets viewer curiosity ("how much time is left?").</div>
+      <div class="subplot-resolves">RESOLVES › <strong>00:00:00 at airport</strong></div>
+    </div>
+
+    <div class="subplot">
+      <div class="subplot-num">SUBPLOT 06</div>
+      <div class="subplot-title">Proof of Model <em style="font-style:italic; color:var(--dim);">(hidden)</em></div>
+      <span class="subplot-engine engine-hidden">Hidden Engine</span>
+      <div class="subplot-desc">Never stated out loud. Just shown. Phoenix operator + Akron market + 48 hours + works. Viewer concludes it themselves. Sales asset without being a pitch.</div>
+      <div class="subplot-resolves">RESOLVES › <strong>Never said. Always felt.</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- MUST CAPTURE -->
+<section class="section" id="capture">
+  <div class="section-label cyan">04 — Non-Negotiable Beats</div>
+  <h2>Must capture. <span class="grad-money">No exceptions.</span></h2>
+  <p class="section-intro">If these aren't on a card by Saturday night, we don't have the video. Vince and Austin both reference this list every transition.</p>
+
+  <div class="capture-grid">
+    <div class="capture-item"><div class="capture-check"></div><div class="capture-text">Wheel spin clip + reveal phone call to Justin <span class="who">→ Pre-cut, plus live new footage</span></div></div>
+    <div class="capture-item"><div class="capture-check"></div><div class="capture-text">Matt on the plane setting the stakes — clock starts <span class="who">→ Austin, A-cam</span></div></div>
+    <div class="capture-item"><div class="capture-check"></div><div class="capture-text">Landing at Cleveland Hopkins — boots on ground <span class="who">→ Vince, vertical + GoPro</span></div></div>
+    <div class="capture-item"><div class="capture-check"></div><div class="capture-text">Drive to Akron — windshield narration <span class="who">→ Dash GoPro + Austin</span></div></div>
+    <div class="capture-item"><div class="capture-check"></div><div class="capture-text">Pulling up to Justin's — first hug, first reaction <span class="who">→ Austin + Vince roaming</span></div></div>
+    <div class="capture-item"><div class="capture-check"></div><div class="capture-text">Whiteboard diagnostic — leak named out loud <span class="who">→ Austin locked off, Vince B-roll</span></div></div>
+    <div class="capture-item"><div class="capture-check"></div><div class="capture-text">At least one live Gatekeeper call where agent says yes <span class="who">→ Speakerphone, on lav</span></div></div>
+    <div class="capture-item"><div class="capture-check"></div><div class="capture-text">In-person Gatekeeper meeting in Meta glasses <span class="who">→ Matt first-person</span></div></div>
+    <div class="capture-item"><div class="capture-check"></div><div class="capture-text">Property walk-through <span class="who">→ Meta glasses + handheld</span></div></div>
+    <div class="capture-item"><div class="capture-check"></div><div class="capture-text">Contract signing OR pipeline handoff moment <span class="who">→ Both crew on it</span></div></div>
+    <div class="capture-item"><div class="capture-check"></div><div class="capture-text">Branded handoff object (hat / plaque / mock check) <span class="who">→ Bring from Phoenix</span></div></div>
+    <div class="capture-item"><div class="capture-check"></div><div class="capture-text">Justin's final to-camera: what changes Monday <span class="who">→ Austin locked off</span></div></div>
+    <div class="capture-item"><div class="capture-check"></div><div class="capture-text">Matt to-camera: the leak most operators have <span class="who">→ Austin, golden hour if possible</span></div></div>
+    <div class="capture-item"><div class="capture-check"></div><div class="capture-text">Matt at airport / on plane home — clock at 00:00:00 <span class="who">→ Selfie / Vince</span></div></div>
+    <div class="capture-item"><div class="capture-check"></div><div class="capture-text">Aerial / drone of Akron + properties <span class="who">→ DJI, weather permitting</span></div></div>
+    <div class="capture-item"><div class="capture-check"></div><div class="capture-text">Dinner Friday — long-form sit-down with Justin <span class="who">→ Austin A-cam + lavs</span></div></div>
+  </div>
+</section>
+
+<!-- THE CLOCK -->
+<section class="section">
+  <div class="section-label yellow">05 — Production Note</div>
+  <h2>The <span class="grad-fire">clock</span> is the engine.</h2>
+
+  <div class="clock-callout">
+    <div class="clock-digits">47:23:11</div>
+    <div class="clock-text">
+      <h3>Add a literal countdown overlay.</h3>
+      <p>
+        Top-right or bottom-left corner. <strong>Starts at 48:00:00 when I board the plane Thursday night. Hits 00:00:00 when I board the plane home Saturday night.</strong> Different timestamps shown at every scene change. Cheapest, highest-impact retention move you can make on a challenge format — every scene change resets viewer curiosity ("how much time is left?"). It's why challenge content holds attention. <strong>Non-negotiable.</strong>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section class="section" id="schedule">
+  <div class="section-label">06 — The Two-Day Plan</div>
+  <h2>Hour by hour. <span class="grad-fire">Friday + Saturday.</span></h2>
+  <p class="section-intro">Share with Justin Thursday night so he's ready when we land. Build buffer — the day will slide. The clock doesn't care.</p>
+
+  <div class="schedule">
+
+    <div class="schedule-day-header"><span>Friday</span> — Boots Down, Find the Leak, Run the System</div>
+
+    <div class="slot">
+      <div class="slot-time">7:30 AM<span class="clock">CLOCK 48:00:00</span></div>
+      <div class="slot-content">
+        <div class="slot-title">Land at Cleveland Hopkins</div>
+        <div class="slot-desc">Tired, real, no makeup. Camera up from the moment we taxi.</div>
+        <div class="slot-capture">Capture: Airport arrival, boots-on-ground, Matt-to-camera setting the clock</div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">7:45 AM<span class="clock">CLOCK 47:45:00</span></div>
+      <div class="slot-content">
+        <div class="slot-title">Rental SUV pickup + gear check</div>
+        <div class="slot-desc">Cards loaded, batteries fresh, Meta glasses paired, GoPro mounted in dash.</div>
+        <div class="slot-capture">Capture: B-roll of gear loadout — opens great for Vince's short-form</div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">8:15 AM<span class="clock">CLOCK 47:15:00</span></div>
+      <div class="slot-content">
+        <div class="slot-title">Drive Cleveland → Akron</div>
+        <div class="slot-desc">~45 min. Narrate from passenger seat: who Justin is, what's broken, the bet.</div>
+        <div class="slot-capture">Capture: Dash GoPro, A-cam from passenger seat, drone shot of transition</div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">9:15 AM<span class="clock">CLOCK 46:15:00</span></div>
+      <div class="slot-content">
+        <div class="slot-title">Arrive at Justin's</div>
+        <div class="slot-desc">First hug, first reaction. Don't over-direct — let it breathe.</div>
+        <div class="slot-capture">Capture: Both cameras on the approach + reveal moment</div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">9:30 AM<span class="clock">CLOCK 46:00:00</span></div>
+      <div class="slot-content">
+        <div class="slot-title">Whiteboard Diagnostic — The Leak Hunt</div>
+        <div class="slot-desc">Pull Justin's real numbers — messages, Tier 1s, TTBs, offers, contracts. Find the leak live. ~60–90 min. This is the teaching heart of the video.</div>
+        <div class="slot-capture">Capture: Austin locked off, Vince roaming for B-roll, lavs on both</div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">11:00 AM<span class="clock">CLOCK 44:30:00</span></div>
+      <div class="slot-content">
+        <div class="slot-title">Take the Controls — Start Dialing</div>
+        <div class="slot-desc">Pull Gatekeeper lists. Matt operates at full speed. Justin shadows. Push for same-day appointments.</div>
+        <div class="slot-capture">Capture: Speakerphone calls on lavs, "yes" moments, reaction shots</div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">12:30 PM<span class="clock">CLOCK 43:00:00</span></div>
+      <div class="slot-content">
+        <div class="slot-title">Lunch on the move</div>
+        <div class="slot-desc">Drive-thru or quick local spot. Don't lose the clock.</div>
+        <div class="slot-capture">Capture: Car confessionals — what's working, what's not</div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">1:00 PM<span class="clock">CLOCK 42:30:00</span></div>
+      <div class="slot-content">
+        <div class="slot-title">Continue dialing — comp inbound leads</div>
+        <div class="slot-desc">Run the 3 Cs. Push for verbal acceptance. Get appointments locked.</div>
+        <div class="slot-capture">Capture: More live calls, the moment a deal turns the corner</div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">3:00 PM<span class="clock">CLOCK 40:30:00</span></div>
+      <div class="slot-content">
+        <div class="slot-title">In-person Gatekeeper appointment</div>
+        <div class="slot-desc">Meta glasses on. First-person POV inside someone's office or at a property. Best content of the trip.</div>
+        <div class="slot-capture">Capture: Meta first-person, Austin/Vince at distance for cutaways</div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">5:00 PM<span class="clock">CLOCK 38:30:00</span></div>
+      <div class="slot-content">
+        <div class="slot-title">Back to dialing — push for EOD contract</div>
+        <div class="slot-desc">Final push of the day. Try to land a verbal or signed contract before dinner.</div>
+        <div class="slot-capture">Capture: The close attempt, win or loss</div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">7:00 PM<span class="clock">CLOCK 36:30:00</span></div>
+      <div class="slot-content">
+        <div class="slot-title">Dinner with Justin — long-form sit-down</div>
+        <div class="slot-desc">Local spot. Reflect on the day, plan Saturday. This is the emotional anchor of the video.</div>
+        <div class="slot-capture">Capture: Austin A-cam, dual lavs, ambient mic</div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">9:00 PM<span class="clock">CLOCK 34:30:00</span></div>
+      <div class="slot-content">
+        <div class="slot-title">Drive back to Cleveland hotel</div>
+        <div class="slot-desc">Card dumps to SSD. Charge everything. Plan Saturday morning.</div>
+        <div class="slot-capture">Capture: Hotel arrival B-roll if energy allows</div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">10:30 PM<span class="clock">CLOCK 33:00:00</span></div>
+      <div class="slot-content">
+        <div class="slot-title">Sleep</div>
+        <div class="slot-desc">Hard out. Saturday is execution day.</div>
+      </div>
+    </div>
+
+    <div class="schedule-day-header sat"><span>Saturday</span> — Execute, Hand Off, Fly Home</div>
+
+    <div class="slot">
+      <div class="slot-time">7:00 AM<span class="clock">CLOCK 24:30:00</span></div>
+      <div class="slot-content">
+        <div class="slot-title">Wake up, coffee, gear up</div>
+        <div class="slot-desc">Drive back to Akron. Halfway-point check-in confessional.</div>
+        <div class="slot-capture">Capture: Hotel checkout, drive narration, "we're halfway"</div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">8:30 AM<span class="clock">CLOCK 23:00:00</span></div>
+      <div class="slot-content">
+        <div class="slot-title">Back at Justin's — Round 2</div>
+        <div class="slot-desc">Pick up where we left off. Follow up on Friday's pipeline. Reignite the strongest leads.</div>
+        <div class="slot-capture">Capture: Reunion, energy shift from yesterday</div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">9:00 AM<span class="clock">CLOCK 22:30:00</span></div>
+      <div class="slot-content">
+        <div class="slot-title">Push the strongest lead — Try to close</div>
+        <div class="slot-desc">Follow-up calls. Property visit if needed. Get the contract.</div>
+        <div class="slot-capture">Capture: Live calls, the negotiation, the "yes" or "no"</div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">1:00 PM<span class="clock">CLOCK 18:30:00</span></div>
+      <div class="slot-content">
+        <div class="slot-title">Lunch — and if we have contract, dispo mode</div>
+        <div class="slot-desc">If we landed it: call Checkbooks, send blast, work the assignment. If not: build the pipeline doc to hand off.</div>
+        <div class="slot-capture">Capture: Dispo calls or pipeline build session</div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">3:00 PM<span class="clock">CLOCK 16:30:00</span></div>
+      <div class="slot-content">
+        <div class="slot-title">THE HANDOFF</div>
+        <div class="slot-desc">Hand the pipeline / contract to Justin on camera. Branded item moment. This is the payoff scene for the whole video — protect it. Both cameras on, lavs hot, no rushing.</div>
+        <div class="slot-capture">Capture: Multi-angle. This is the emotional climax.</div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">4:00 PM<span class="clock">CLOCK 15:30:00</span></div>
+      <div class="slot-content">
+        <div class="slot-title">Final to-cameras</div>
+        <div class="slot-desc">Justin: what changes Monday morning. Matt: the leak most operators have. Golden hour if weather cooperates.</div>
+        <div class="slot-capture">Capture: Austin A-cam locked off, both with lavs</div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">5:00 PM<span class="clock">CLOCK 14:30:00</span></div>
+      <div class="slot-content">
+        <div class="slot-title">Leave Akron — drive to Cleveland Hopkins</div>
+        <div class="slot-desc">Matt confessional in passenger seat. The "what just happened" beat.</div>
+        <div class="slot-capture">Capture: Drive narration, "did we do it"</div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">6:30 PM<span class="clock">CLOCK 13:00:00</span></div>
+      <div class="slot-content">
+        <div class="slot-title">Airport — wrap shot, clock hits 00:00:00</div>
+        <div class="slot-desc">Sign-off at the gate. Reset the clock graphic to zero on screen.</div>
+        <div class="slot-capture">Capture: Final to-camera at the gate, then plane window B-roll</div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">8:00 PM<span class="clock">CLOCK 00:00:00</span></div>
+      <div class="slot-content">
+        <div class="slot-title">Fly home</div>
+        <div class="slot-desc">Back to Phoenix. Card dumps to backup drive on the plane if possible.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CREW -->
+<section class="section" id="crew">
+  <div class="section-label pink">07 — Crew Assignments</div>
+  <h2>Who shoots <span class="grad-heat">what.</span></h2>
+  <p class="section-intro">Lock these roles before we fly so we're not stepping on each other on the ground. Anyone can pick up a second camera in a pinch, but defaults below.</p>
+
+  <div class="crew">
+    <div class="crew-card matt">
+      <div class="crew-role">In Frame · Operator</div>
+      <div class="crew-name">Matt</div>
+      <ul class="crew-list">
+        <li>Meta Ray-Bans on for every agent appointment + property walk</li>
+        <li>Always lavved</li>
+        <li>Run the calls, the diagnostic, the close</li>
+        <li>Confessionals to handheld GoPro in car</li>
+        <li>Set the clock at every act transition</li>
+      </ul>
+    </div>
+    <div class="crew-card vince">
+      <div class="crew-role">Short Form · B-Roll · Roaming</div>
+      <div class="crew-name">Vince</div>
+      <ul class="crew-list">
+        <li>Vertical rig + gimbal everywhere</li>
+        <li>Capture every "yes" moment + reaction</li>
+        <li>Drone (Akron arrival, property exteriors)</li>
+        <li>Hook clips for Reels/Shorts</li>
+        <li>Backup A-cam if Austin is moving</li>
+      </ul>
+    </div>
+    <div class="crew-card austin">
+      <div class="crew-role">Long Form · A-Cam · Sit-Downs</div>
+      <div class="crew-name">Austin</div>
+      <ul class="crew-list">
+        <li>A-cam locked on Matt for sit-downs</li>
+        <li>Whiteboard scene, dinner, handoff, final to-cameras</li>
+        <li>Shotgun on cam + dual wireless lavs</li>
+        <li>Card dumps to SSD nightly</li>
+        <li>Owns the audio chain</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPMENT -->
+<section class="section" id="gear">
+  <div class="section-label cyan">08 — Equipment Checklist</div>
+  <h2>The full <span class="grad-money">loadout.</span></h2>
+  <p class="section-intro">Pack from this list. Print and check off as gear hits the case. Audio is what separates "real" from "amateur" — do not skimp.</p>
+
+  <div class="equipment">
+
+    <div class="equip-cat">
+      <div class="equip-cat-header">
+        <div class="equip-cat-title">Cameras</div>
+        <div class="equip-cat-icon">A-CAM</div>
+      </div>
+      <ul class="equip-list">
+        <li><div class="equip-checkbox"></div><div><strong>Austin's A-cam</strong> + 2 spare batteries + 2× 128GB cards min</div></li>
+        <li><div class="equip-checkbox"></div><div><strong>Vince's short-form rig</strong> + gimbal + vertical setup</div></li>
+        <li><div class="equip-checkbox"></div><div><strong>Meta Ray-Bans</strong> — buy + charge + test before flying</div></li>
+        <li><div class="equip-checkbox"></div><div><strong>2× GoPro</strong> — 1 dash-mount, 1 handheld for confessionals</div></li>
+        <li><div class="equip-checkbox"></div><div><strong>DJI drone</strong> (Mini or Air) for aerial / establishing shots</div></li>
+      </ul>
+    </div>
+
+    <div class="equip-cat">
+      <div class="equip-cat-header">
+        <div class="equip-cat-title">Audio</div>
+        <div class="equip-cat-icon">SOUND</div>
+      </div>
+      <ul class="equip-list">
+        <li><div class="equip-checkbox"></div><div><strong>3× wireless lavs</strong> — DJI Mic 2 or Rode Wireless Pro</div></li>
+        <li><div class="equip-checkbox"></div><div><strong>Shotgun mic</strong> on Austin's A-cam</div></li>
+        <li><div class="equip-checkbox"></div><div>Spare batteries for every lav</div></li>
+        <li><div class="equip-checkbox"></div><div>Windshields / dead cats for outdoor</div></li>
+      </ul>
+    </div>
+
+    <div class="equip-cat">
+      <div class="equip-cat-header">
+        <div class="equip-cat-title">Lighting</div>
+        <div class="equip-cat-icon">LIGHT</div>
+      </div>
+      <ul class="equip-list">
+        <li><div class="equip-checkbox"></div><div><strong>1× Aputure MC</strong> (or similar small LED) for indoor scenes</div></li>
+        <li><div class="equip-checkbox"></div><div>Diffusion + barn doors</div></li>
+        <li><div class="equip-checkbox"></div><div>Don't overbuild — natural light is on-brand</div></li>
+      </ul>
+    </div>
+
+    <div class="equip-cat">
+      <div class="equip-cat-header">
+        <div class="equip-cat-title">Power + Storage</div>
+        <div class="equip-cat-icon">POWER</div>
+      </div>
+      <ul class="equip-list">
+        <li><div class="equip-checkbox"></div><div>All chargers + 2× wall multi-ports</div></li>
+        <li><div class="equip-checkbox"></div><div>Car USB-C chargers</div></li>
+        <li><div class="equip-checkbox"></div><div><strong>1TB SSD</strong> for nightly card dumps</div></li>
+        <li><div class="equip-checkbox"></div><div>Power banks for phones (we'll be on calls all day)</div></li>
+      </ul>
+    </div>
+
+    <div class="equip-cat">
+      <div class="equip-cat-header">
+        <div class="equip-cat-title">Production Props</div>
+        <div class="equip-cat-icon">PROPS</div>
+      </div>
+      <ul class="equip-list">
+        <li><div class="equip-checkbox"></div><div><strong>Large whiteboard</strong> or giant Post-It pad + markers</div></li>
+        <li><div class="equip-checkbox"></div><div>Printed copy of Justin's KPI dashboard / numbers</div></li>
+        <li><div class="equip-checkbox"></div><div><strong>No Fluff branded handoff object</strong> — hat, plaque, or mock check</div></li>
+      </ul>
+    </div>
+
+    <div class="equip-cat">
+      <div class="equip-cat-header">
+        <div class="equip-cat-title">Logistics</div>
+        <div class="equip-cat-icon">OPS</div>
+      </div>
+      <ul class="equip-list">
+        <li><div class="equip-checkbox"></div><div><strong>Rental SUV</strong> with cargo space — reserved Thursday</div></li>
+        <li><div class="equip-checkbox"></div><div>Hotel in Cleveland, high floor if possible</div></li>
+        <li><div class="equip-checkbox"></div><div>Send Justin this schedule Thursday night</div></li>
+        <li><div class="equip-checkbox"></div><div>Snacks, water — clock doesn't pause for hunger</div></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- TITLE / THUMB -->
+<section class="section" id="thumb">
+  <div class="section-label">09 — Title + Thumbnail Direction</div>
+  <h2>The <span class="grad-fire">click.</span></h2>
+  <p class="section-intro">Thumbnail = emotional trigger. Title = intellectual clarity. They do different jobs. Front-load "48 Hours" — it survives mobile truncation.</p>
+
+  <div class="title-thumb">
+    <div class="tt-card">
+      <div class="tt-label">Title — A/B test options</div>
+      <ul class="tt-options">
+        <li>I Flew to Cleveland With 48 Hours to Save His Business</li>
+        <li>48 Hours to Fix a Wholesaler's Business (Ohio)</li>
+        <li>Can I Save His Business in 48 Hours?</li>
+      </ul>
+      <div class="thumb-desc" style="margin-top:18px;">
+        <strong>Why these:</strong> "48 Hours" up front. Stakes + transformation. Easy mobile read. Avoid the giving/MrBeast lane — this lane is operator + clock.
+      </div>
+    </div>
+
+    <div class="tt-card">
+      <div class="tt-label">Thumbnail — Direction</div>
+      <div class="thumb-mock">
+        <div>
+          <div class="thumb-48">48<br>HOURS</div>
+        </div>
+        <div class="thumb-sub">TO SAVE HIS BUSINESS</div>
+      </div>
+      <div class="thumb-desc">
+        <strong>Me</strong> mid-call in the rental, big bold red "48 HOURS" overlay, Cleveland skyline or Akron sign in frame, my expression urgent. No smile. <strong>Tension, not triumph.</strong> Save the triumph for the video.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERIES -->
+<section class="section" id="series">
+  <div class="section-label purple">10 — The Series</div>
+  <h2>This is <span class="grad-electric">Volume 2.</span></h2>
+
+  <div class="series">
+    <div class="series-vol">› The Operator Drop · A No Fluff Series</div>
+    <h3>One <span>operator.</span> One city. <span>48 hours.</span> Every month.</h3>
+    <p>
+      The Florida video with Joe is <strong>Volume 1</strong>. This Cleveland video is <strong>Volume 2</strong>. End the Cleveland edit with a teaser: <em>"Next month, somebody else wins the spin. Could be you."</em> That's the loop that turns one video into a content engine and the wheel spin into the most-anticipated community moment of every month.
+    </p>
+    <p>
+      <strong>Why it compounds:</strong> The algorithm rewards series → viewers binge them. Every community member becomes potential fuel. Video 2 references V1, V3 references V2. Sponsorships become sellable once it's a known format. And the community gets a visible reward path — the wheel spin becomes legendary.
+    </p>
+    <div class="series-volumes">
+      <div class="vol-pill">V01 · FLORIDA · JOE</div>
+      <div class="vol-pill active">V02 · CLEVELAND · JUSTIN</div>
+      <div class="vol-pill next">V03 · ??? · ???</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-logo">NO<span class="dot">.</span>FLUFF</div>
+  <p>Field Guide · The Cleveland Drop · V02</p>
+</footer>
+
+</body>
+</html>
